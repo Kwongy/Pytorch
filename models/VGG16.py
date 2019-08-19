@@ -67,6 +67,6 @@ class VGG_16(nn.Module):
 
 if __name__ == '__main__':
     # test
-    graph = torch.rand([5, 3, 224, 224], requires_grad=True)
-    net = VGG_16(graph_shape=224, in_channel=3, out_channel=10)
+    graph = torch.rand([5, 3, 512, 512], requires_grad=True)
+    net = VGG_16(graph_shape=512, in_channel=3, out_channel=10)
     print(torch.argmax(net(graph)[0], dim=0))
