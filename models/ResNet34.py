@@ -23,8 +23,8 @@ class ResNet_34(nn.Module):
             nn.ReLU(inplace=True),
             nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
         )
-        # residual_block = [3, 4, 6, 3]
-        residual_block = [1, 2]
+        residual_block = [3, 4, 6, 3]
+        # residual_block = [1, 2]
         self.feature_layer = self.feature_extract(residual_block)  # parameter is list
 
         # calculate input shape of linear layer
