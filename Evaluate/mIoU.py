@@ -38,12 +38,14 @@ class Measure:
         self.hist = self._fast_hist(pred, lab)
 
     def evaluate(self):
+# (fn + fp) or (fn + fp + tp) may be equal 0, this is a mistake that 0 divide 0
+        epsilon = 1e-10
         tp = np.diag(self.hist)
         fn = self.hist.sum(axis=0) - tp
         fp = self.hist.sum(axis=1) - tp
         precesion = tp.sum()/(tp + fp).sum()
-        recall = np.mean(tp / (fn + tp))
-        mIoU = np.mean(tp / (fn + fp + tp))
+        recall = np.mean(tp / (fn + tp + epsilon))
+        mIoU = np.mean(tp / (fn + fp + tp+ epsilon))
         # freq = self.hist.sum(axis=1) / self.hist.sum()
         # fwavacc = (freq[freq > 0] * miu[freq > 0]).sum()
         f1 = 2 * precesion * recall / (precesion + recall)
